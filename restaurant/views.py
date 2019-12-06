@@ -1,9 +1,10 @@
 from .models import MenuItem, Restaurant
 from .serializers import MenuItemSerializer, RestaurantSerializer
-from rest_framework import viewsets
+from rest_framework import viewsets, filters
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from django.db.models import Model
+from django_filters.rest_framework import DjangoFilterBackend
 import random
 
 
@@ -13,6 +14,8 @@ class RestaurantViewSet(viewsets.ModelViewSet):
     """
     queryset = Restaurant.objects.all()
     serializer_class = RestaurantSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['name']
 
     @action(methods=['get'], detail=False)
     def random(self, request):
