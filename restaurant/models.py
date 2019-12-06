@@ -12,7 +12,7 @@ class Restaurant(models.Model):
 
     @property
     def address(self):
-        attrs = [self.street, self.code, self.city, self.country]
+        attrs = [self.street, ' '.join([self.code, self.city]).strip(), self.country]
         notempty = [s for s in attrs if s]
         return ', '.join(notempty)
 
